@@ -6,12 +6,25 @@ import java.io.*;
 import java.util.*;
 
 public class SouvenirStore {
+    private final SouvenirFactory factory;
     private final List<Souvenir> souvenirs;
     private final List<Manufacturer> manufacturers;
 
-    public SouvenirStore() {
+
+    public SouvenirStore(SouvenirFactory factory) {
+        this.factory = factory;
         souvenirs = new ArrayList<>();
         manufacturers = new ArrayList<>();
+    }
+    public void addSouvenir(String name, String manufacturerDetails, Date releaseDate, double price) {
+        Souvenir souvenir = factory.createSouvenir(name, manufacturerDetails, releaseDate, price);
+        souvenirs.add(souvenir);
+    }
+
+
+    public void addManufacturer(String name, String country) {
+        Manufacturer manufacturer = factory.createManufacturer(name, country);
+        manufacturers.add(manufacturer);
     }
     public void saveSouvenirsToJSON(String fileName) {
         try (Writer writer = new FileWriter(fileName)) {

@@ -1,22 +1,15 @@
 import java.util.Date;
 public class Main {
     public static void main(String[] args) {
-        SouvenirStore store = new SouvenirStore();
+        SouvenirFactory factory = new ConcreteFactory();
+        SouvenirStore store = new SouvenirStore(factory);
 
-        Souvenir souvenir1 = new Souvenir("Фірмова чашка", "Національний університет кораблебудування", new Date(), 10.99);
-        Souvenir souvenir2 = new Souvenir("Фірмова чашка", "Приватбанк", new Date(), 9.99);
-        Souvenir souvenir3 = new Souvenir("Біла футболка з логотипом", "Rozetka", new Date(), 9.99);
-        Manufacturer manufacturer1 = new Manufacturer("Національний університет кораблебудування", "Україна");
-        Manufacturer manufacturer2 = new Manufacturer("Приватбанк", "Україна");
-        Manufacturer manufacturer3 = new Manufacturer("Rozetka", "Україна");
-
-
-        store.addSouvenir(souvenir1);
-        store.addSouvenir(souvenir2);
-        store.addSouvenir(souvenir3);
-        store.addManufacturer(manufacturer1);
-        store.addManufacturer(manufacturer2);
-        store.addManufacturer(manufacturer3);
+        store.addSouvenir("Фірмова чашка", "Національний університет кораблебудування", new Date(), 10.99);
+        store.addSouvenir("Фірмова чашка", "Приватбанк", new Date(), 9.99);
+        store.addSouvenir("Біла футболка з логотипом", "Rozetka", new Date(), 9.99);
+        store.addManufacturer("Національний університет кораблебудування", "Україна");
+        store.addManufacturer("Приватбанк", "Україна");
+        store.addManufacturer("Rozetka", "Україна");
 
         store.saveSouvenirsToJSON("souvenirs.json");
         store.loadSouvenirsFromJSON("souvenirs.json");
@@ -44,7 +37,7 @@ public class Main {
 
         System.out.println("\nВидалення заданого виробника та його сувенірів");
         store.deleteManufacturer("Національний університет кораблебудування");
-        
+
         store.saveSouvenirsToJSON("souvenirs.json");
     }
 }
